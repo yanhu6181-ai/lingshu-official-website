@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>灵枢 AI | AI 接待与人机协作</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#504535",
+                        "secondary-container": "#e6dde2",
+                        "primary-fixed-dim": "#b3cada",
+                        "on-background": "#191c1d",
+                        "on-tertiary-fixed": "#231a0d",
+                        "surface-dim": "#d9dadb",
+                        "surface-tint": "#4b616f",
+                        "surface-container": "#edeeef",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#635d61",
+                        "inverse-surface": "#2e3132",
+                        "on-surface": "#191c1d",
+                        "on-primary-container": "#3c515f",
+                        "surface": "#f8f9fa",
+                        "on-surface-variant": "#42474b",
+                        "tertiary": "#695c4b",
+                        "on-primary-fixed-variant": "#344957",
+                        "on-tertiary-container": "#584d3d",
+                        "primary": "#4b616f",
+                        "surface-bright": "#f8f9fa",
+                        "background": "#f8f9fa",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e1e3e4",
+                        "tertiary-container": "#cfbeaa",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e7e8e9",
+                        "on-secondary-fixed-variant": "#4b4549",
+                        "tertiary-fixed": "#f2e0ca",
+                        "secondary-fixed": "#e9e0e5",
+                        "surface-variant": "#e1e3e4",
+                        "primary-container": "#adc4d4",
+                        "inverse-on-surface": "#f0f1f2",
+                        "inverse-primary": "#b3cada",
+                        "secondary-fixed-dim": "#cdc4c9",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#d5c4af",
+                        "on-secondary-container": "#676165",
+                        "outline": "#73787c",
+                        "primary-fixed": "#cee6f6",
+                        "on-primary-fixed": "#061e2a",
+                        "outline-variant": "#c3c7cb",
+                        "on-secondary-fixed": "#1e1a1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "md": "24px",
+                        "xl": "80px",
+                        "margin-desktop": "64px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "gutter": "24px",
+                        "lg": "48px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Manrope", "PingFang SC", "Microsoft YaHei", "sans-serif"],
+                        "label-sm": ["Manrope", "PingFang SC", "Microsoft YaHei", "sans-serif"],
+                        "headline-lg": ["Manrope", "PingFang SC", "Microsoft YaHei", "sans-serif"],
+                        "headline-lg-mobile": ["Manrope", "PingFang SC", "Microsoft YaHei", "sans-serif"],
+                        "display-lg": ["Manrope", "PingFang SC", "Microsoft YaHei", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .morandi-gradient {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e6dde2 50%, #cee6f6 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #4b616f, #635d61);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Header Navigation -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 dark:bg-surface-dim/70 backdrop-blur-xl border-b border-white/20 shadow-sm transition-all duration-300">
+<nav class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-7xl mx-auto">
+<div class="font-display-lg text-headline-lg text-primary dark:text-primary-fixed-dim tracking-tight">灵枢 AI</div>
+<div class="hidden md:flex items-center space-x-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">平台功能</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md" href="#">解决方案</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">资源中心</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">价格</a>
+</div>
+<div class="flex items-center space-x-sm">
+<button class="hidden sm:block text-on-surface-variant hover:text-primary transition-colors px-4 py-2 font-body-md text-body-md">登录</button>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-full hover:opacity-80 transition-opacity font-body-md text-body-md shadow-md">预约演示</button>
+</div>
+</nav>
+</header>
+<main class="relative pt-32 overflow-hidden">
+<!-- Hero Section -->
+<section class="relative px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto mb-xl">
+<div class="grid md:grid-cols-2 gap-lg items-center">
+<div class="z-10">
+<span class="inline-flex items-center px-4 py-1.5 bg-tertiary-container/30 text-tertiary font-label-sm text-label-sm rounded-full mb-md">
+<span class="material-symbols-outlined text-sm mr-2">verified_user</span>
+                        下一代 AI 客户成功平台
+                    </span>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-6 leading-tight">
+                        不错过任何线索，<br/>
+<span class="text-gradient">也不把业务交给黑箱。</span>
+</h1>
+<p class="text-on-surface-variant text-body-md mb-lg max-w-lg">
+                        灵枢 AI 弥合了自动化效率与人类情感之间的鸿沟。基于知识库的响应系统，让每一次咨询都充满温度且专业。
+                    </p>
+<div class="flex flex-wrap gap-md">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-bold flex items-center hover:shadow-lg transition-all group">
+                            开始免费试用
+                            <span class="material-symbols-outlined ml-2 transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+<button class="border-2 border-primary/20 text-primary px-8 py-4 rounded-xl font-bold hover:bg-primary/5 transition-all">
+                            观看视频
+                        </button>
+</div>
+</div>
+<div class="relative">
+<!-- Morandi Decorative Background -->
+<div class="absolute -top-20 -right-20 w-96 h-96 bg-primary-container/20 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-20 -left-10 w-72 h-72 bg-tertiary-container/20 rounded-full blur-3xl"></div>
+<div class="relative glass-card rounded-3xl p-4 overflow-hidden shadow-2xl">
+<img alt="灵枢 AI IP 吉祥物" class="w-full h-auto rounded-2xl floating" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBahcrS09aeTjJxIzrFT_Rlkn9bSm80TfBsq-Bo0LjjhzpX283stMIVj4t-OLOQJsbFttO1tnl8s62llur11qabitmwM-MM8_e4ocGN87Zo1wySMwfzyvY-oFDQ5lnifLrB0dOc-wd03LC5xIuIHJCzHgjbMtDYc_AHgXHdaIYs7q8U8n6TNU9ZMPdJX2jqLaPKx_SaUsqoZnI0z_5NK7J9Q-cnIYFLzjUoFXUkhg41Ph14lRy-ppyTqwHA_kwa9_-EjBg"/>
+<div class="absolute bottom-8 right-8 bg-white/90 backdrop-blur shadow-lg rounded-2xl p-4 flex items-center space-x-3 border border-white/40">
+<div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+<span class="text-label-sm font-bold text-on-surface">AI 运行中: 24/7 全天候监控</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Bento Grid: Smart Reception & Intent -->
+<section class="px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto mb-xl">
+<div class="grid md:grid-cols-12 gap-gutter">
+<!-- Smart Reception -->
+<div class="md:col-span-7 glass-card rounded-3xl p-lg relative overflow-hidden group">
+<div class="relative z-10">
+<div class="bg-primary-container/30 w-12 h-12 rounded-xl flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-primary">chat_bubble</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg mb-4">智能接待</h3>
+<p class="text-on-surface-variant mb-lg">基于知识库的 WhatsApp 自动回复，将对话转化为承诺。您的业务逻辑，由 AI 精准交付。</p>
+<div class="space-y-sm">
+<div class="flex items-center space-x-3 p-3 bg-white/40 rounded-xl border border-white/20">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+<span class="text-body-md">即时语境感知回复</span>
+</div>
+<div class="flex items-center space-x-3 p-3 bg-white/40 rounded-xl border border-white/20">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+<span class="text-body-md">开箱即用的多语言支持</span>
+</div>
+</div>
+</div>
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-10 group-hover:opacity-20 transition-opacity">
+<div class="w-full h-full" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBNI2WRgbkbjzYwBOMG8l1o0ZBEOPTYd7pA-dIZIMNLYLLbTRBRD3Ad7vBFjnjPhEr5r783Rbo0XKRyqZDtKnsrK8zsM7rMVxCR26Z5_4eHDCtulKRDDkWdMXctWAxXbO8ykBYgP4GSrRIg4SO3gROjus_ds6E0Q28IOBVNqi9Q8NNEYq6hGIZhzjDqxFdBiWVbDYzexJ5RsjgmBcJeyKS1QcsTOvVcQp_br-Z_4_DGLIXoMPViFLfLEivoC0FrWyXo53E'); background-size: cover;"></div>
+</div>
+</div>
+<!-- Intent Scoring -->
+<div class="md:col-span-5 bg-secondary-container/50 rounded-3xl p-lg flex flex-col justify-between border border-white/20">
+<div>
+<div class="bg-white/60 w-12 h-12 rounded-xl flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg mb-4">意图评分</h3>
+<p class="text-on-surface-variant">根据行为信号和语言标记，自动对高价值咨询进行优先级排序。</p>
+</div>
+<div class="mt-lg">
+<div class="flex items-end justify-between mb-sm">
+<span class="text-label-sm font-bold opacity-60">潜在客户优先级</span>
+<span class="text-headline-lg font-bold text-primary">98%</span>
+</div>
+<div class="w-full h-2 bg-white/40 rounded-full overflow-hidden">
+<div class="w-[98%] h-full bg-primary transition-all duration-1000"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Handoff Mechanics: Interactive Control -->
+<section class="bg-surface-container-low py-xl">
+<div class="px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
+<div class="text-center mb-lg">
+<h2 class="font-display-lg text-headline-lg md:text-display-lg mb-4">三级人机协作机制</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">通过精准的接管机制，在 AI 的响应速度与人工的深度审核之间取得完美平衡。</p>
+</div>
+<div class="grid md:grid-cols-3 gap-gutter">
+<!-- Level 1 -->
+<div class="bg-white rounded-3xl p-md border border-outline-variant/30 hover:shadow-xl transition-all hover:-translate-y-2">
+<div class="text-primary font-bold text-label-sm mb-4">等级 01</div>
+<h4 class="font-headline-lg text-headline-lg mb-2">只提醒</h4>
+<p class="text-on-surface-variant mb-lg text-body-md">AI 持续监控聊天，仅在检测到特定关键词或高意图信号时才提醒您的团队。</p>
+<div class="p-4 bg-surface-container-highest rounded-2xl">
+<div class="flex items-center space-x-2 text-label-sm text-primary mb-2">
+<span class="material-symbols-outlined text-sm">notifications_active</span>
+<span>Slack 实时提醒</span>
+</div>
+<div class="text-xs italic opacity-70">"检测到高价值线索询问企业版报价。需要人工介入。"</div>
+</div>
+</div>
+<!-- Level 2 -->
+<div class="bg-white rounded-3xl p-md border-2 border-primary/20 shadow-lg relative overflow-hidden">
+<div class="absolute top-4 right-4 px-3 py-1 bg-primary-container text-on-primary-container rounded-full text-xs font-bold">最受欢迎</div>
+<div class="text-primary font-bold text-label-sm mb-4">等级 02</div>
+<h4 class="font-headline-lg text-headline-lg mb-2">草稿需确认</h4>
+<p class="text-on-surface-variant mb-lg text-body-md">AI 根据您的文档生成回复草稿。您的团队审核后点击“发送”，或进行一键式编辑。</p>
+<div class="p-4 bg-primary-fixed/20 rounded-2xl border border-primary-fixed">
+<div class="text-xs font-bold mb-2">已生成草稿:</div>
+<div class="text-xs mb-3">"您好 Sarah，我看到您对我们 Q3 的发布计划感兴趣..."</div>
+<div class="flex space-x-2">
+<button class="bg-primary text-white text-[10px] px-3 py-1 rounded-full">发送</button>
+<button class="bg-white border border-outline text-[10px] px-3 py-1 rounded-full">编辑</button>
+</div>
+</div>
+</div>
+<!-- Level 3 -->
+<div class="bg-white rounded-3xl p-md border border-outline-variant/30 hover:shadow-xl transition-all hover:-translate-y-2">
+<div class="text-primary font-bold text-label-sm mb-4">等级 03</div>
+<h4 class="font-headline-lg text-headline-lg mb-2">低风险自动回</h4>
+<p class="text-on-surface-variant mb-lg text-body-md">针对营业时间、地理位置或基础 FAQ 等低风险、高频咨询实现全自动化。 </p>
+<div class="p-4 bg-tertiary-container/20 rounded-2xl">
+<div class="flex items-center justify-center h-16">
+<div class="flex space-x-1">
+<div class="w-1.5 h-1.5 bg-tertiary rounded-full animate-bounce"></div>
+<div class="w-1.5 h-1.5 bg-tertiary rounded-full animate-bounce [animation-delay:0.2s]"></div>
+<div class="w-1.5 h-1.5 bg-tertiary rounded-full animate-bounce [animation-delay:0.4s]"></div>
+</div>
+</div>
+<div class="text-[10px] text-center font-bold text-tertiary uppercase">AI 全自动交互中</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Retention & CRM Section -->
+<section class="px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto py-xl">
+<div class="glass-card rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-xl">
+<div class="md:w-1/2 p-lg lg:p-xl">
+<h2 class="font-display-lg text-headline-lg mb-6">用户留存与 CRM 集成</h2>
+<div class="space-y-lg">
+<div class="flex gap-md">
+<div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">diversity_3</span>
+</div>
+<div>
+<h5 class="font-bold mb-1">沉默线索重新触达</h5>
+<p class="text-on-surface-variant text-body-md">AI 自动监控沉睡客户，并建议低阻力的跟进方案，自然地重启对话。</p>
+</div>
+</div>
+<div class="flex gap-md">
+<div class="flex-shrink-0 w-12 h-12 bg-tertiary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">psychology</span>
+</div>
+<div>
+<h5 class="font-bold mb-1">智能跟进建议</h5>
+<p class="text-on-surface-variant text-body-md">基于用户之前的互动行为和购买记录，提供情境化的智能提醒。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="md:w-1/2 min-h-[400px] relative bg-surface-variant">
+<div class="absolute inset-0 opacity-40 mix-blend-multiply" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDu0ucdItfORHuYvqGfvKxdcw4Na7Yk9lMCvl9f07zBc1x1Ro22xaZonhuqENclR-LyQqfo8860uMVQqP92cQKJRBoyP43CqUCxoH9VZUrlzIIibvSoVzdnfwNcj_etKRQg00OViNMrFKaeWb0NrWFccwSI7g0RaxKjcCqYCI-7v2RTWylLASaLgtGvffKdSQ-Sd3r4xGBptnMjkpUt7JLeDqNjn3g8aClAtxzlkCNMKTT1F_bnCeoG3PyotjToRlINY00'); background-size: cover; background-position: center;"></div>
+<div class="absolute inset-0 flex items-center justify-center p-md">
+<div class="glass-card p-6 rounded-2xl shadow-2xl border border-white/40 max-w-sm">
+<div class="flex items-center space-x-4 mb-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR0qE1VcWyuTjpN69gSsNJgRLNX5iNbloaNgwGvgK-HoEjX4tTA0pwlRIk20mvdFy3L9R4tsPaO5M1rge1gDRs4Fy9K9joo8240mmESBKudZ8howDtkOLowro0zGXokCzvzOJjXg98bAu60tlxOBml4nJApToUhlUB_IE5IdVopsB2A5ZiC4acJ8G0bdT1UcV21bt0y3EjNKQ8ADMitccdpXWodGjLyX4PZ8KeK5EFuyWDI0wMHwqPOA"/>
+</div>
+<div>
+<div class="font-bold text-sm">跟进机会</div>
+<div class="text-[10px] opacity-60">客户: "陈马克"</div>
+</div>
+</div>
+<div class="bg-white/50 p-3 rounded-xl text-xs mb-4">
+                                "嘿马克，关于之前的提案，我想了解一下您的想法。也许 5 分钟的沟通可以帮您进一步澄清定价？"
+                            </div>
+<button class="w-full bg-primary text-white py-2 rounded-lg text-xs font-bold">批准跟进</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-xl bg-primary text-on-primary text-center">
+<div class="px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto">
+<h2 class="font-display-lg text-display-lg mb-md">准备好大规模提升共情效率了吗？</h2>
+<p class="text-primary-fixed mb-lg text-body-md">加入 500 多家领先企业，利用灵枢 AI 重塑客户关系。</p>
+<div class="flex flex-col sm:flex-row justify-center gap-md">
+<button class="bg-on-primary text-primary px-10 py-4 rounded-xl font-bold hover:scale-105 transition-transform">免费开始</button>
+<button class="border-2 border-on-primary/30 text-on-primary px-10 py-4 rounded-xl font-bold hover:bg-white/10 transition-colors">联系销售</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-surface-container-highest w-full border-t border-surface-variant">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-xl max-w-7xl mx-auto">
+<div class="mb-lg md:mb-0 text-center md:text-left">
+<div class="font-display-lg text-headline-lg text-primary dark:text-primary-fixed-dim mb-2">灵枢 AI</div>
+<p class="text-on-surface-variant font-body-md text-body-md">灵枢 AI - 为高净值业务打造的精准 AI 系统。</p>
+</div>
+<div class="flex flex-wrap justify-center gap-lg mb-lg md:mb-0">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">产品</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">企业版</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">加入我们</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">隐私政策</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">服务条款</a>
+</div>
+</div>
+<div class="text-center py-6 border-t border-surface-variant/50 text-on-surface-variant font-body-md text-body-md opacity-60">
+            © 2024 灵枢 AI. 保留所有权利。
+        </div>
+</footer>
+<script>
+        // Simple scroll interaction for header shadow
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md', 'py-2');
+                header.classList.remove('py-4');
+            } else {
+                header.classList.remove('shadow-md', 'py-2');
+                header.classList.add('py-4');
+            }
+        });
+
+        // Intersection Observer for fade-in effects
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body></html>

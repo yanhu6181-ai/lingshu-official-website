@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LingShu AI - 从一条内容，到一笔生意</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#504535",
+                    "secondary-container": "#e6dde2",
+                    "primary-fixed-dim": "#b3cada",
+                    "on-background": "#191c1d",
+                    "on-tertiary-fixed": "#231a0d",
+                    "surface-dim": "#d9dadb",
+                    "surface-tint": "#4b616f",
+                    "surface-container": "#edeeef",
+                    "surface-container-low": "#f3f4f5",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#635d61",
+                    "inverse-surface": "#2e3132",
+                    "on-surface": "#191c1d",
+                    "on-primary-container": "#3c515f",
+                    "surface": "#f8f9fa",
+                    "on-surface-variant": "#42474b",
+                    "tertiary": "#695c4b",
+                    "on-primary-fixed-variant": "#344957",
+                    "on-tertiary-container": "#584d3d",
+                    "primary": "#4b616f",
+                    "surface-bright": "#f8f9fa",
+                    "background": "#f8f9fa",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#e1e3e4",
+                    "tertiary-container": "#cfbeaa",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e7e8e9",
+                    "on-secondary-fixed-variant": "#4b4549",
+                    "tertiary-fixed": "#f2e0ca",
+                    "secondary-fixed": "#e9e0e5",
+                    "surface-variant": "#e1e3e4",
+                    "primary-container": "#adc4d4",
+                    "inverse-on-surface": "#f0f1f2",
+                    "inverse-primary": "#b3cada",
+                    "secondary-fixed-dim": "#cdc4c9",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#d5c4af",
+                    "on-secondary-container": "#676165",
+                    "outline": "#73787c",
+                    "primary-fixed": "#cee6f6",
+                    "on-primary-fixed": "#061e2a",
+                    "outline-variant": "#c3c7cb",
+                    "on-secondary-fixed": "#1e1a1e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "md": "24px",
+                    "xl": "80px",
+                    "margin-desktop": "64px",
+                    "xs": "4px",
+                    "sm": "12px",
+                    "gutter": "24px",
+                    "lg": "48px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "display-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .morandi-gradient {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9e0e5 50%, #adc4d4 100%);
+            background-size: 200% 200%;
+            animation: gradientMove 15s ease infinite;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm transition-all duration-300">
+<nav class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-2">
+<img alt="LingShu AI Logo" class="h-8 md:h-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn1WwU1tSCH54yRgptT9Z1jEeRBuaaivAeAo39-cfJ9lOtLMNYXlmrxeAaXR0d6g1ilmDVuJIDdBwcG2hqWp_wBFLxSFPUl2AVFce4fHI3bFORUhsxe4jbrhrABHnZGQZyFWvwPb87Y6p5C6kpI8WSBvAXH4VROwsrxvIy4UuReHRZwOogtla3er6YT8cwPSkdgJn18i3fpFRsBILKQV3i0PIBq7t8p48YdAuKc_iaf_82hUt1CFcB0QdD-cnfhUuSiU0"/>
+<span class="font-display-lg text-headline-lg text-primary tracking-tight hidden sm:block">LingShu AI</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md" href="#">平台功能</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">解决方案</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">资源中心</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">价格方案</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden sm:block text-on-surface-variant hover:text-primary transition-opacity font-body-md text-body-md">登录</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-bold hover:opacity-80 transition-opacity font-body-md text-body-md">预约产品演示</button>
+</div>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center pt-24 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuDF_WVe8g5fgqUZsCTyFPXPd2tXhfexfZZiIikVvbhbmmvyH8TcEAng2rU7ZNtGFoVX2L-lJsdl4M-dCbs5KQyxX7taNeEUhGFZOKPc3eXlJ8nzgvgDiysQvV8EpucRnURGd1OY5yFeyz4x_Rnebt7jg4qSQaZ14VVma4iV3-RBXBKCu3JDHw0vKxYZiNRGYQTrMzCEn5co8N0jfkl5OyIYeVPJ6lDqpjQxYkmRuqNSwbUIgGmEkLAa9439FdJFeUXTSpA')] bg-cover bg-center opacity-20 blur-2xl scale-110"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop grid md:grid-cols-2 gap-12 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+<span class="text-label-sm font-label-sm">出海企业的 AI 增长工作台</span>
+</div>
+<h1 class="font-display-lg text-display-lg md:text-[64px] leading-tight text-primary">
+                        从一条内容，<br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">到一笔生意</span>
+</h1>
+<p class="text-body-md text-on-surface-variant max-w-lg leading-relaxed">
+                        发现海外社媒机会，AI 生成并发布内容，精准追踪每一条询盘；再由懂你产品与规则的 AI 客服，完成接待、筛选和持续跟进。
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all group">
+                            开始免费试用
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="glass-card text-primary px-8 py-4 rounded-xl font-bold border border-primary/20 hover:bg-white/50 transition-all">
+                            观看 90 秒产品演示
+                        </button>
+</div>
+</div>
+<div class="relative flex justify-center">
+<div class="relative w-full max-w-md aspect-square glass-card rounded-[40px] p-8 animate-pulse shadow-2xl">
+<img alt="LingShu AI IP Character" class="w-full h-full object-contain drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjLvhQ7WVrKvq256FJrlwgpy-iMhUc9YpJiR3KVzRuw1maxsDcdiNXNhogptZvQE6HjDWbXsCBKldPGyvCDmo168XIvXeIt5DAH4lUXqe3oYuQvJ1500AB4FpOq6GynAzKGLgOrOcyMCrfw8fReEVyXvxBafDgZzclVAbh3eSV8Ip4zIOqIl3G8iZ_mYUi5W8Btkffx0UiCcTlL7-C0pi51Hr2FWsTrTVdZqEsUAanK4qCbaOnyKM8vTJ2GhG8mlN2LgE"/>
+<!-- Floating Micro-interactions -->
+<div class="absolute -top-6 -right-6 glass-card p-4 rounded-2xl shadow-lg border border-white animate-bounce" style="animation-duration: 3s;">
+<span class="material-symbols-outlined text-primary text-3xl">trending_up</span>
+</div>
+<div class="absolute -bottom-4 -left-8 glass-card p-4 rounded-2xl shadow-lg border border-white animate-bounce" style="animation-duration: 4s;">
+<span class="material-symbols-outlined text-tertiary text-3xl">chat_bubble</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Bar -->
+<section class="py-12 bg-surface-container-low border-y border-white/20">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+<p class="text-center text-label-sm font-label-sm text-on-surface-variant mb-8 uppercase tracking-widest">支持 YouTube、TikTok、Instagram、Facebook 与 WhatsApp</p>
+<div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 grayscale opacity-60">
+<span class="font-display-lg text-headline-lg text-secondary">YouTube</span>
+<span class="font-display-lg text-headline-lg text-secondary">TikTok</span>
+<span class="font-display-lg text-headline-lg text-secondary">Instagram</span>
+<span class="font-display-lg text-headline-lg text-secondary">Facebook</span>
+<span class="font-display-lg text-headline-lg text-secondary">WhatsApp</span>
+</div>
+</div>
+</section>
+<!-- Value Prop: Comparison -->
+<section class="py-xl bg-surface relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16 space-y-4">
+<h2 class="font-display-lg text-headline-lg md:text-display-lg text-primary">流量不是终点。能被接住的流量，才是增长。</h2>
+<p class="text-body-md text-on-surface-variant max-w-2xl mx-auto">灵枢把社媒运营和客户接待放进同一条增长链路：从趋势洞察、内容生成、多平台发布，到 WhatsApp 询盘归因、AI 接待和销售跟进。</p>
+</div>
+<div class="grid md:grid-cols-2 gap-gutter">
+<!-- Traditional -->
+<div class="p-8 rounded-3xl bg-surface-container-highest/50 border border-outline-variant space-y-6">
+<div class="flex items-center gap-3 text-secondary">
+<span class="material-symbols-outlined">block</span>
+<h3 class="font-headline-lg text-headline-lg">传统外贸营销</h3>
+</div>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-error text-[20px]">cancel</span>
+                                内容创作随心所欲，缺乏数据支撑
+                            </li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-error text-[20px]">cancel</span>
+                                平台分散，私信回复不及时，流失率高
+                            </li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-error text-[20px]">cancel</span>
+                                无法追溯询盘来源，广告费白花
+                            </li>
+</ul>
+</div>
+<!-- LingShu AI -->
+<div class="p-8 rounded-3xl glass-card border-primary/30 shadow-xl space-y-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4">
+<span class="material-symbols-outlined text-primary-container text-6xl opacity-20">verified</span>
+</div>
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined">rocket_launch</span>
+<h3 class="font-headline-lg text-headline-lg">灵枢 AI 闭环增长</h3>
+</div>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                用趋势与竞品找到机会：AI 实时监控与爆款拆解
+                            </li>
+<li class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                内容级询盘归因：精准追踪每一笔成交的原始内容来源
+                            </li>
+<li class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                智能接待闭环：AI 先接待识别，销售带着完整上下文接手
+                            </li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Social Growth Bento -->
+<section class="py-xl bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+<h2 class="font-display-lg text-headline-lg md:text-display-lg text-center mb-16 text-primary">从“今天发什么”，到“内容正在带来谁”</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="md:col-span-2 glass-card p-8 rounded-[32px] group hover:-translate-y-1 transition-all">
+<span class="text-display-lg text-primary/20 block mb-4">01</span>
+<h4 class="font-headline-lg text-headline-lg mb-4 text-primary">发现机会</h4>
+<p class="text-body-md text-on-surface-variant mb-6">AI 实时监控多平台流行趋势，看趋势，也看为什么会火。</p>
+<div class="h-32 bg-white/30 rounded-xl flex items-center justify-center border border-dashed border-primary/20">
+<span class="material-symbols-outlined text-primary text-4xl animate-pulse">query_stats</span>
+</div>
+</div>
+<div class="glass-card p-8 rounded-[32px] group hover:-translate-y-1 transition-all">
+<span class="text-display-lg text-primary/20 block mb-4">02</span>
+<h4 class="font-headline-lg text-headline-lg mb-4 text-primary">AI 生成内容</h4>
+<p class="text-body-md text-on-surface-variant">从产品资料出发，生成能发布的内容，而不只是文案。</p>
+</div>
+<div class="glass-card p-8 rounded-[32px] group hover:-translate-y-1 transition-all">
+<span class="text-display-lg text-primary/20 block mb-4">03</span>
+<h4 class="font-headline-lg text-headline-lg mb-4 text-primary">多平台发布</h4>
+<p class="text-body-md text-on-surface-variant">一次配置，多平台、多账号差异化发布。</p>
+</div>
+<div class="md:col-span-4 glass-card p-8 rounded-[32px] flex flex-col md:flex-row items-center gap-8 group hover:-translate-y-1 transition-all">
+<div class="flex-1">
+<span class="text-display-lg text-primary/20 block mb-4">04</span>
+<h4 class="font-headline-lg text-headline-lg mb-4 text-primary">内容级归因</h4>
+<p class="text-body-md text-on-surface-variant">不只看播放量，更知道客户从哪条内容来。精准追踪 ROI。</p>
+</div>
+<div class="w-full md:w-1/2 h-40 bg-gradient-to-r from-primary-container/20 to-tertiary-container/20 rounded-2xl flex items-center justify-around">
+<span class="material-symbols-outlined text-primary text-5xl">person_search</span>
+<span class="material-symbols-outlined text-secondary text-2xl">arrow_forward</span>
+<span class="material-symbols-outlined text-tertiary text-5xl">shopping_cart_checkout</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Customer Service -->
+<section class="py-xl bg-surface">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop grid md:grid-cols-2 gap-16 items-center">
+<div class="order-2 md:order-1">
+<div class="space-y-6">
+<h2 class="font-display-lg text-headline-lg md:text-display-lg text-primary">AI 先接待，销售只在关键时刻出现</h2>
+<p class="text-body-md text-on-surface-variant leading-relaxed">
+                            内容负责打开对话，AI 负责不错过机会。当客户从 WhatsApp 发来询盘，灵枢会自动识别来源、理解意图并补全客户上下文。
+                        </p>
+<div class="space-y-4">
+<div class="flex items-start gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined p-2 bg-primary/10 text-primary rounded-lg">hub</span>
+<div>
+<h5 class="font-bold text-on-surface">全天候理解客户</h5>
+<p class="text-label-sm text-on-surface-variant">基于企业资料、FAQ 与业务规则，多语言自动识别与回复</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined p-2 bg-primary/10 text-primary rounded-lg">psychology</span>
+<div>
+<h5 class="font-bold text-on-surface">意图识别与分级</h5>
+<p class="text-label-sm text-on-surface-variant">AI 自动为线索打分，提醒销售优先跟进高意图客户</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined p-2 bg-primary/10 text-primary rounded-lg">verified_user</span>
+<div>
+<h5 class="font-bold text-on-surface">分级放权，不越边界</h5>
+<p class="text-label-sm text-on-surface-variant">高风险问题自动生成草稿待销售确认，确保报价与承诺万无一失</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="order-1 md:order-2 glass-card p-6 rounded-[40px] shadow-2xl relative">
+<div class="absolute -top-4 -left-4 bg-primary text-white px-4 py-2 rounded-full text-label-sm font-bold shadow-lg">WhatsApp AI 助手在线</div>
+<div class="space-y-4">
+<!-- Simulated Chat Interface -->
+<div class="flex justify-start">
+<div class="bg-surface-container-highest p-4 rounded-2xl rounded-tl-none max-w-[80%] text-on-surface text-body-md">
+                                你好！我看到了你们关于智能工厂解决方案的视频，能分享一下价格表吗？
+                            </div>
+</div>
+<div class="flex justify-end">
+<div class="bg-primary text-on-primary p-4 rounded-2xl rounded-tr-none max-w-[80%] text-body-md shadow-md">
+                                当然可以！我们的智能工厂基础套餐起价为 5 万美元。根据您对视频的兴趣，您可能也会喜欢我们的自动化模块。需要我发送完整的 PDF 资料吗？
+                            </div>
+</div>
+<div class="flex justify-start">
+<div class="bg-surface-container-highest p-4 rounded-2xl rounded-tl-none max-w-[80%] text-on-surface text-body-md">
+                                好的，请发给我。另外，你们支持本地维护吗？
+                            </div>
+</div>
+<div class="p-3 bg-tertiary-container/20 rounded-xl border border-tertiary/20 text-center">
+<p class="text-label-sm text-tertiary italic">AI 识别：高意向 (95/100)。正在转接给销售经理...</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Industry Scenarios -->
+<section class="py-xl bg-surface-container">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+<h2 class="font-display-lg text-headline-lg md:text-display-lg text-center mb-16 text-primary">为真实的出海增长团队而设计</h2>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Factory -->
+<div class="bg-surface p-8 rounded-3xl border border-white hover:shadow-xl transition-all group">
+<div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">factory</span>
+</div>
+<h4 class="font-headline-lg text-headline-lg mb-4 text-on-surface">源头工厂 Factory</h4>
+<p class="text-body-md text-on-surface-variant">展示生产线与工艺细节，通过内容建立全球买家信任，直接获取大宗订单询盘。</p>
+</div>
+<!-- Brand -->
+<div class="bg-surface p-8 rounded-3xl border border-white hover:shadow-xl transition-all group">
+<div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6 text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">loyalty</span>
+</div>
+<h4 class="font-headline-lg text-headline-lg mb-4 text-on-surface">出海品牌 Brand</h4>
+<p class="text-body-md text-on-surface-variant">建立海外品牌矩阵，AI 辅助本土化叙事，沉淀私域流量池，提升品牌忠诚度。</p>
+</div>
+<!-- Agency -->
+<div class="bg-surface p-8 rounded-3xl border border-white hover:shadow-xl transition-all group">
+<div class="w-16 h-16 rounded-2xl bg-tertiary/10 flex items-center justify-center mb-6 text-tertiary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">groups</span>
+</div>
+<h4 class="font-headline-lg text-headline-lg mb-4 text-on-surface">代运营机构 Agency</h4>
+<p class="text-body-md text-on-surface-variant">通过自动化工具降低运营成本，提升客户转化报告透明度，实现规模化增长。</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-xl relative overflow-hidden">
+<div class="absolute inset-0 z-0"></div>
+<div class="relative z-10 max-w-4xl mx-auto px-margin-mobile text-center glass-card p-12 md:p-24 rounded-[64px] border-white/40">
+<h2 class="font-display-lg text-display-lg mb-8 text-primary">让你的下一条内容，<br/>不仅仅是点赞。</h2>
+<p class="text-headline-lg text-on-surface-variant mb-12">看看灵枢 AI 如何把你的产品、社媒账号和客户接待连成一条增长链路。</p>
+<div class="flex flex-col sm:flex-row justify-center gap-6">
+<button class="bg-primary text-on-primary px-12 py-5 rounded-full font-bold text-body-md hover:scale-105 transition-transform shadow-xl">立即开启增长</button>
+<button class="bg-white/80 text-primary px-12 py-5 rounded-full font-bold text-body-md border border-primary/20 hover:bg-white transition-colors">咨询出海顾问</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest py-xl">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12 pb-12 border-b border-white/20">
+<div class="space-y-4">
+<div class="flex items-center gap-2">
+<img alt="LingShu AI Logo" class="h-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN7UoCqhcZwILJ2diTELzf7_RC8xTmg9D-2xLFJ0y92iTxR9oHyk_HtYDpY6ByMrpGLHeosdSxpsfrvo62D5SRQ2Ly8DP1Lw-mV8pBXcZOpHtgy_2bQAUrbmnKAAuW3OWlxWS3re3_btA18783Di0tyxqBN_KkLvaog1dNRLqsUDDWzQ4Y82MJjbD2UD7tDDdGk4Ii2CkWggHi2QDCMEXu0fB-sFFZUq7Su0W-jkiyXl7aG-9x-6AQydy3fklTJXFJm10"/>
+<span class="font-display-lg text-headline-lg text-primary tracking-tight">LingShu AI</span>
+</div>
+<p class="text-body-md text-on-surface-variant max-w-xs">面向出海企业的 AI 增长工作台。</p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
+<div class="space-y-4">
+<h6 class="font-bold text-primary">产品服务</h6>
+<ul class="space-y-2 text-on-surface-variant text-body-md">
+<li><a class="hover:text-primary transition-colors" href="#">社媒增长</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">智能客服</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">客户管理</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h6 class="font-bold text-primary">关于公司</h6>
+<ul class="space-y-2 text-on-surface-variant text-body-md">
+<li><a class="hover:text-primary transition-colors" href="#">企业介绍</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">加入我们</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">新闻中心</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h6 class="font-bold text-primary">法律条款</h6>
+<ul class="space-y-2 text-on-surface-variant text-body-md">
+<li><a class="hover:text-primary transition-colors" href="#">隐私政策</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">服务协议</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-on-surface-variant text-label-sm">
+<span>© 2024 LingShu AI. 保留所有权利。</span>
+<div class="flex gap-6">
+<span class="material-symbols-outlined hover:text-primary cursor-pointer">language</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer">share</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple scroll effect for header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('bg-surface/95', 'shadow-md');
+                header.classList.remove('bg-surface/70');
+            } else {
+                header.classList.remove('bg-surface/95', 'shadow-md');
+                header.classList.add('bg-surface/70');
+            }
+        });
+
+        // Hover lift animation on cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

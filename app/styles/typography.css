@@ -1,0 +1,19 @@
+body {
+  font-family: var(--font-ui);
+  font-kerning: normal;
+  font-synthesis: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+time,
+[data-type="data"],
+[data-type="label"] {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+}

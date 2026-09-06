@@ -1,0 +1,8 @@
+:root {
+  --font-ui: var(--font-noto-sans-sc), "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-display: var(--font-noto-serif-sc), "Songti SC", "STSong", serif;
+  --font-data: var(--font-geist), Inter, ui-sans-serif, sans-serif;
+  --motion-brand: 760ms cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-story: 560ms cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ui: 180ms ease;
+}

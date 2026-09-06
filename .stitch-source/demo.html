@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>预约产品演示 | 灵枢 AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#504535",
+                        "secondary-container": "#e6dde2",
+                        "primary-fixed-dim": "#b3cada",
+                        "on-background": "#191c1d",
+                        "on-tertiary-fixed": "#231a0d",
+                        "surface-dim": "#d9dadb",
+                        "surface-tint": "#4b616f",
+                        "surface-container": "#edeeef",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#635d61",
+                        "inverse-surface": "#2e3132",
+                        "on-surface": "#191c1d",
+                        "on-primary-container": "#3c515f",
+                        "surface": "#f8f9fa",
+                        "on-surface-variant": "#42474b",
+                        "tertiary": "#695c4b",
+                        "on-primary-fixed-variant": "#344957",
+                        "on-tertiary-container": "#584d3d",
+                        "primary": "#4b616f",
+                        "surface-bright": "#f8f9fa",
+                        "background": "#f8f9fa",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e1e3e4",
+                        "tertiary-container": "#cfbeaa",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e7e8e9",
+                        "on-secondary-fixed-variant": "#4b4549",
+                        "tertiary-fixed": "#f2e0ca",
+                        "secondary-fixed": "#e9e0e5",
+                        "surface-variant": "#e1e3e4",
+                        "primary-container": "#adc4d4",
+                        "inverse-on-surface": "#f0f1f2",
+                        "inverse-primary": "#b3cada",
+                        "secondary-fixed-dim": "#cdc4c9",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#d5c4af",
+                        "on-secondary-container": "#676165",
+                        "outline": "#73787c",
+                        "primary-fixed": "#cee6f6",
+                        "on-primary-fixed": "#061e2a",
+                        "outline-variant": "#c3c7cb",
+                        "on-secondary-fixed": "#1e1a1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "md": "24px",
+                        "xl": "80px",
+                        "margin-desktop": "64px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "gutter": "24px",
+                        "lg": "48px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Manrope", "sans-serif"],
+                        "label-sm": ["Manrope", "sans-serif"],
+                        "headline-lg": ["Manrope", "sans-serif"],
+                        "headline-lg-mobile": ["Manrope", "sans-serif"],
+                        "display-lg": ["Manrope", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #f8f9fa;
+            color: #191c1d;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .morandi-gradient-bg {
+            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDGcq0NFoshF4UhnS2N_hXRnAka4jQIwdkJf_GNJQf0b9v0Fa-5ma0hc7JZhN4MHJWDqM9lIf8HrIa0i9VbaDoDEGhAxXEQEdRO0oKr85JxlqCQdmZwhOATFhto8KG0dU0YxujmNiDm9fZmmB96XlpRcsu43tSD3BER4ACLxdEMCnbTA43rLsCbidWTkNcuRtRPIDYzJqHH98LTMcUKfO_yJvrzj1ooJB8PyYHSsEo6I5TMZtP7kGm2RBYjNEYh-1pHbjo');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .input-morandi {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid #c3c7cb;
+            transition: all 0.3s ease;
+        }
+
+        .input-morandi:focus {
+            outline: none;
+            border-color: #adc4d4;
+            box-shadow: 0 0 0 4px rgba(173, 196, 212, 0.2);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 dark:bg-surface-dim/70 backdrop-blur-xl border-b border-white/20 shadow-sm">
+<nav class="flex justify-between items-center px-margin-desktop py-4 max-w-7xl mx-auto">
+<div class="font-display-lg text-headline-lg text-primary dark:text-primary-fixed-dim tracking-tight">灵枢 AI</div>
+<div class="hidden md:flex gap-base">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-4 py-2" href="#">平台产品</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-4 py-2" href="#">行业方案</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-4 py-2" href="#">资源中心</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-4 py-2" href="#">价格方案</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden sm:block text-primary font-body-md hover:opacity-80 transition-opacity">登录</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-body-md shadow-sm hover:opacity-90 transition-opacity">预约演示</button>
+</div>
+</nav>
+</header>
+<!-- Main Content Area -->
+<main class="pt-32 pb-xl px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto min-h-[calc(100vh-80px)]">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl items-start">
+<!-- Left Column: Trust & Value -->
+<div class="lg:col-span-5 space-y-lg">
+<div class="space-y-md">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-container/30 text-tertiary font-label-sm text-label-sm uppercase tracking-wider">
+                        个性化体验
+                    </span>
+<h1 class="font-display-lg text-display-lg text-primary leading-tight">
+                        开启 <br/>AI 协作的新纪元
+                    </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+                        加入数百家正通过灵枢 AI 转型数字景观的领先企业。我们的演示将根据您的组织挑战量身定制。
+                    </p>
+</div>
+<!-- Trust Quote / Mascot Section -->
+<div class="glass-panel p-md rounded-xl relative overflow-hidden group">
+<div class="flex items-start gap-md relative z-10">
+<div class="flex-shrink-0 w-24 h-24 rounded-full overflow-hidden border-2 border-primary-container shadow-sm bg-white animate-float">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU3JVp0R8z4ht5R8sg0jldGzIRhhsUf68BiemHcEnoS6UENVv1rskQizUh9rsOC4TUU1hmsKeMM0rkj97_Ac-byY-cbjb8vM9p7sE0dM1cjlBqko5BrHEIKd7DxG97L5KVraFnVucDogn7iCoTK2tQv9su1Dw4SDM6kC5s-rZsqyslr_fowxzt50Mm5srDTRsOYLlsN6dzF4xTnJuj2UHoU9Pt9oCx1x1Hd6XsEVLuVYz4VNru2wy4LH4xtOrcuyb4Q3k"/>
+</div>
+<div class="space-y-2">
+<p class="font-body-md text-body-md text-on-surface italic leading-relaxed">
+                                “我们的使命是让 AI 成为团队创造力的自然延伸。从初次演示到全面部署，我将全程为您指引。”
+                            </p>
+<div class="pt-2">
+<span class="font-label-sm text-label-sm font-bold text-primary block">灵枢小助手</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">全球品牌吉祥物 &amp; 服务大使</span>
+</div>
+</div>
+</div>
+<!-- Subtle background abstract element -->
+<div class="absolute -right-4 -bottom-4 w-32 h-32 rounded-full bg-secondary-container/20 blur-3xl group-hover:bg-primary-container/30 transition-colors duration-500"></div>
+</div>
+<!-- Feature Mini-List -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">verified_user</span>
+<span class="font-label-sm text-on-surface-variant">企业级安全保障</span>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">bolt</span>
+<span class="font-label-sm text-on-surface-variant">即时集成能力</span>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">support_agent</span>
+<span class="font-label-sm text-on-surface-variant">24/7 专家支持</span>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">analytics</span>
+<span class="font-label-sm text-on-surface-variant">深度数据洞察</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Contact Form -->
+<div class="lg:col-span-7">
+<div class="glass-panel p-md md:p-lg rounded-xl shadow-sm relative">
+<!-- Subtle Morandi Background Texture -->
+<div class="absolute inset-0 opacity-5 pointer-events-none rounded-xl morandi-gradient-bg"></div>
+<div class="relative z-10 space-y-lg">
+<div class="text-center md:text-left">
+<h2 class="font-headline-lg text-headline-lg text-primary">预约产品演示</h2>
+<p class="font-body-md text-on-surface-variant mt-2">请填写以下详细信息，我们的团队将在 2 小时内与您联系。</p>
+</div>
+<form class="space-y-md" id="demoForm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Name -->
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant px-1">姓名</label>
+<input class="w-full h-12 px-4 rounded-lg input-morandi font-body-md" placeholder="例如：Alex Morandi" type="text"/>
+</div>
+<!-- Company -->
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant px-1">公司名称</label>
+<input class="w-full h-12 px-4 rounded-lg input-morandi font-body-md" placeholder="灵枢创意科技" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- WhatsApp/Mobile -->
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant px-1">手机 / WhatsApp</label>
+<div class="relative">
+<input class="w-full h-12 px-4 rounded-lg input-morandi font-body-md" placeholder="+86 138 0000 0000" type="tel"/>
+<span class="material-symbols-outlined absolute right-4 top-3 text-on-surface-variant/50">phone_iphone</span>
+</div>
+</div>
+<!-- Platform -->
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant px-1">主要获客平台</label>
+<select class="w-full h-12 px-4 rounded-lg input-morandi font-body-md appearance-none">
+<option>请选择平台...</option>
+<option>Web 应用程序</option>
+<option>iOS &amp; Android</option>
+<option>内部基础设施</option>
+<option>云服务</option>
+</select>
+</div>
+</div>
+<!-- Challenges -->
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant px-1">核心挑战与目标</label>
+<textarea class="w-full p-4 rounded-lg input-morandi font-body-md resize-none" placeholder="请告诉我们您希望解决的具体问题..." rows="4"></textarea>
+</div>
+<!-- CTA -->
+<div class="pt-4">
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl font-headline-lg flex items-center justify-center gap-md hover:brightness-110 active:scale-[0.99] transition-all shadow-md group" type="submit">
+                                    确认预约产品演示
+                                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<p class="text-center font-label-sm text-on-surface-variant/60 mt-4">
+                                    点击确认即表示您同意我们的隐私政策和服务条款。
+                                </p>
+</div>
+</form>
+</div>
+</div>
+<!-- Subtle Decorative Elements -->
+<div class="mt-lg flex flex-wrap justify-center lg:justify-start gap-lg opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+<div class="h-8 flex items-center font-display-lg text-headline-lg text-outline">深受信任</div>
+<div class="h-8 flex items-center font-bold text-outline">VERTEX</div>
+<div class="h-8 flex items-center font-bold text-outline">ETHER</div>
+<div class="h-8 flex items-center font-bold text-outline">AURA.SYS</div>
+<div class="h-8 flex items-center font-bold text-outline">NORDIC</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface-container dark:bg-surface-container-highest mt-xl">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-xl max-w-7xl mx-auto gap-md">
+<div class="flex flex-col gap-2 items-center md:items-start">
+<div class="font-display-lg text-headline-lg text-primary dark:text-primary-fixed-dim">灵枢 AI</div>
+<p class="font-body-md text-body-md text-on-surface-variant">通过雅致设计提升智慧高度。</p>
+</div>
+<div class="flex flex-wrap justify-center gap-md">
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">产品</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">企业版</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">加入我们</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">隐私政策</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">服务条款</a>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant opacity-70">
+                © 2024 灵枢 AI. 版权所有.
+            </div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for the form
+        const form = document.getElementById('demoForm');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button');
+            const originalText = btn.innerHTML;
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> 处理中...';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> 预约已发送！';
+                btn.classList.replace('bg-primary', 'bg-tertiary');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    btn.classList.replace('bg-tertiary', 'bg-primary');
+                    form.reset();
+                }, 3000);
+            }, 1500);
+        });
+
+        // Soft parallax effect for the glass panel
+        document.addEventListener('mousemove', (e) => {
+            const amount = 5;
+            const x = (e.clientX / window.innerWidth - 0.5) * amount;
+            const y = (e.clientY / window.innerHeight - 0.5) * amount;
+            
+            document.querySelectorAll('.glass-panel').forEach(panel => {
+                panel.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body></html>
